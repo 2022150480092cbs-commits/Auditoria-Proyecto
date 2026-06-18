@@ -1,0 +1,481 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Nosotros | JACCAF COMPANY</title>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;600;700;800&display=swap"
+        rel="stylesheet">
+
+    <style>
+        /* 1. RESET Y BASES */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Montserrat', sans-serif;
+            text-decoration: none;
+            list-style: none;
+        }
+
+        body {
+            background-color: #f4f6f8;
+            color: #333;
+            line-height: 1.6;
+        }
+
+        /* 2. NAVBAR CORPORATIVO */
+        nav {
+            background-color: #1a2a38;
+            /* Azul oscuro corporativo */
+            padding: 20px 5%;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+        }
+
+        .logo {
+            color: white;
+            font-size: 20px;
+            letter-spacing: 2px;
+        }
+
+        .logo span {
+            font-weight: 800;
+        }
+
+        .btn-regresar {
+            color: #00f2d3;
+            /* Turquesa oficial */
+            font-weight: 700;
+            font-size: 13px;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            border: 1px solid #00f2d3;
+            padding: 8px 16px;
+            border-radius: 4px;
+            transition: 0.3s;
+        }
+
+        .btn-regresar:hover {
+            background-color: #00f2d3;
+            color: #1a2a38;
+        }
+
+        /* 3. HERO BANNER Minimalista */
+        header {
+            background-color: #1a2a38;
+            color: white;
+            padding: 80px 20px;
+            text-align: center;
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        header h1 {
+            font-size: 42px;
+            font-weight: 800;
+            letter-spacing: 4px;
+            margin-bottom: 10px;
+        }
+
+        header p {
+            color: #00f2d3;
+            font-size: 15px;
+            letter-spacing: 2px;
+            font-weight: 600;
+            text-transform: uppercase;
+        }
+
+        /* 4. CONTENEDOR PRINCIPAL */
+        .main-container {
+            max-width: 1100px;
+            margin: 50px auto;
+            padding: 0 20px;
+        }
+
+        /* Bloques Estratégicos (Misión, Visión, Objetivo) */
+        .estrategia-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+            gap: 25px;
+            margin-bottom: 50px;
+        }
+
+        .card-premium {
+            background: #ffffff;
+            padding: 35px 25px;
+            border-radius: 4px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.03);
+            border-top: 4px solid #1a2a38;
+            transition: 0.3s ease;
+        }
+
+        .card-premium.accent {
+            border-top: 4px solid #00f2d3;
+        }
+
+        .card-premium:hover {
+            transform: translateY(-4px);
+            box-shadow: 0 15px 35px rgba(0, 0, 0, 0.07);
+        }
+
+        .card-premium h2 {
+            color: #1a2a38;
+            font-size: 20px;
+            font-weight: 700;
+            margin-bottom: 15px;
+        }
+
+        .card-premium p {
+            color: #555;
+            font-size: 14px;
+            text-align: justify;
+            line-height: 1.7;
+        }
+
+        /* Secciones de Bloque Completo */
+        .section-block {
+            background: #ffffff;
+            padding: 40px 30px;
+            border-radius: 4px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.03);
+            margin-bottom: 40px;
+        }
+
+        .title-accent {
+            color: #1a2a38;
+            font-size: 22px;
+            font-weight: 700;
+            margin-bottom: 20px;
+            padding-bottom: 10px;
+            border-bottom: 2px solid #e1e8ed;
+        }
+
+        .text-block p {
+            margin-bottom: 15px;
+            text-align: justify;
+            color: #444;
+            font-size: 15px;
+        }
+
+        .text-block h4 {
+            color: #1a2a38;
+            font-size: 16px;
+            margin-top: 20px;
+            margin-bottom: 8px;
+            font-weight: 700;
+        }
+
+        /* Destacados en grid */
+        .info-highlights {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 20px;
+            margin: 30px 0;
+        }
+
+        .h-item {
+            background: #f8f9fa;
+            padding: 20px;
+            border-radius: 4px;
+            border-left: 4px solid #1a2a38;
+        }
+
+        .h-icon {
+            font-size: 24px;
+            display: block;
+            margin-bottom: 10px;
+        }
+
+        .h-item h4 {
+            color: #1a2a38;
+            font-size: 15px;
+            margin-bottom: 5px;
+        }
+
+        .h-item p {
+            font-size: 13px;
+            color: #666;
+        }
+
+        /* 5. CUADRÍCULA DE COLABORADORES */
+        .team-title {
+            text-align: center;
+            font-size: 26px;
+            color: #1a2a38;
+            margin-top: 60px;
+            margin-bottom: 30px;
+            font-weight: 700;
+        }
+
+        .team-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 25px;
+            margin-bottom: 40px;
+        }
+
+        .member-card {
+            background: #ffffff;
+            padding: 30px 20px;
+            border-radius: 4px;
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.03);
+            text-align: center;
+            border-bottom: 3px solid #e1e8ed;
+            transition: 0.3s ease;
+        }
+
+        .member-card.highlight {
+            border-bottom: 3px solid #00f2d3;
+            background: linear-gradient(to bottom, #ffffff, #fafafa);
+        }
+
+        .member-card:hover {
+            transform: translateY(-4px);
+            box-shadow: 0 12px 30px rgba(0, 0, 0, 0.06);
+        }
+
+        .member-card .avatar {
+            width: 60px;
+            height: 60px;
+            background-color: #1a2a38;
+            color: #00f2d3;
+            font-size: 20px;
+            font-weight: 700;
+            line-height: 60px;
+            border-radius: 50%;
+            margin: 0 auto 15px auto;
+        }
+
+        .member-card .name {
+            font-size: 15px;
+            font-weight: 700;
+            color: #1a2a38;
+            margin-bottom: 15px;
+        }
+
+        .social-links {
+            display: flex;
+            justify-content: center;
+            gap: 12px;
+        }
+
+        .social-links a {
+            font-size: 11px;
+            font-weight: 700;
+            color: #1a2a38;
+            background: #f4f6f8;
+            padding: 5px 12px;
+            border-radius: 20px;
+            transition: 0.3s;
+            border: 1px solid #e1e8ed;
+        }
+
+        .social-links a:hover {
+            background: #00f2d3;
+            color: #1a2a38;
+            border-color: #00f2d3;
+        }
+
+        .company-contact {
+            text-align: center;
+            margin-top: 30px;
+            font-size: 14px;
+            color: #666;
+        }
+
+        /* 6. FOOTER */
+        footer {
+            background-color: #ffffff;
+            padding: 30px;
+            border-top: 1px solid #e1e8ed;
+            text-align: center;
+            font-size: 13px;
+            color: #888;
+        }
+    </style>
+</head>
+
+<body>
+
+    <nav>
+        <div class="logo"><span>JACCAF</span> COMPANY</div>
+        <a href="ciudades.html" class="btn-regresar">← Volver a Ciudades</a>
+    </nav>
+
+    <header>
+        <h1>NOSOTROS</h1>
+        <p>Conoce la esencia de nuestra Empresa Virtual</p>
+    </header>
+
+    <div class="main-container">
+
+        <div class="estrategia-grid">
+            <div class="card-premium">
+                <h2>Objetivo</h2>
+                <p>Facilitar el acceso a la inversión en bienes raíces mediante un modelo de financiamiento colectivo,
+                    permitiendo que más personas puedan participar en proyectos inmobiliarios con montos accesibles y
+                    así generar rendimientos y oportunidades de crecimiento patrimonial.</p>
+            </div>
+            <div class="card-premium accent">
+                <h2>Misión</h2>
+                <p>Ofrecer una plataforma digital segura, transparente y accesible que conecte a inversionistas con
+                    desarrolladores inmobiliarios, brindando oportunidades de inversión previamente analizadas y
+                    confiables que permitan a nuestros usuarios participar en el desarrollo del sector inmobiliario.</p>
+            </div>
+            <div class="card-premium">
+                <h2>Visión</h2>
+                <p>Democratizar la inversión inmobiliaria, convirtiéndonos en una plataforma líder que permita a
+                    cualquier persona construir patrimonio a través de proyectos inmobiliarios innovadores, accesibles y
+                    respaldados por tecnología.</p>
+            </div>
+        </div>
+
+        <section class="section-block">
+            <h2 class="title-accent">Descripción de la Empresa: JACCAF COMPANY</h2>
+            <div class="text-block">
+                <p>La empresa <strong>JACCAF COMPANY</strong> es una organización orientada al sector de inversión en
+                    bienes raíces, que tiene como propósito principal facilitar el acceso a este mercado mediante el uso
+                    de tecnología digital. Su modelo de negocio se basa en el <strong>crowdfunding
+                        inmobiliario</strong>, permitiendo que diversas personas participen en proyectos con inversiones
+                    accesibles.</p>
+                <p>La compañía opera a través de una plataforma digital segura y transparente que conecta a
+                    inversionistas con desarrolladores. Para mejorar la toma de decisiones, utilizamos herramientas de
+                    análisis de datos como <strong>Power BI</strong>, permitiendo identificar tendencias y monitorear el
+                    desempeño en tiempo real.</p>
+            </div>
+
+            <div class="info-highlights">
+                <div class="h-item">
+                    <span class="h-icon">📊</span>
+                    <h4>Estructura Organizacional</h4>
+                    <p>Dirección General, Finanzas, TI, Marketing y Operaciones.</p>
+                </div>
+                <div class="h-item">
+                    <span class="h-icon">🛡️</span>
+                    <h4>Seguridad de Información</h4>
+                    <p>Implementación de Centros de Datos y políticas de ciberseguridad.</p>
+                </div>
+            </div>
+
+            <div class="text-block">
+                <p>A futuro, JACCAF COMPANY busca expandir su portafolio inmobiliario y establecer alianzas
+                    estratégicas, innovando en modelos de inversión para posicionarse como una plataforma líder en el
+                    sector.</p>
+            </div>
+        </section>
+
+        <section class="section-block">
+            <h2 class="title-accent">Reglamento de Acceso Biométrico al Data Center</h2>
+            <div class="text-block">
+                <p>Se establecen las siguientes normas de cumplimiento obligatorio para garantizar la integridad de la
+                    infraestructura por medio de biometría:</p>
+
+                <h4>1. Registro Obligatorio de Identidad</h4>
+                <p>• <strong>Enrolamiento Previo:</strong> Nadie puede ingresar sin haber pasado por el proceso de
+                    registro de rasgos biométricos (rostro) ante el encargado de seguridad.</p>
+                <p>• <strong>Capacitación:</strong> Todo el personal autorizado deberá recibir capacitación obligatoria
+                    por parte del técnico encargado sobre el uso correcto y protocolos del sistema de biometría facial.
+                </p>
+                <p>• <strong>Transferibilidad:</strong> El acceso es estrictamente personal. El intento de suplantación
+                    o el uso de métodos para burlar el lector (fotos, moldes, etc.) será motivo de sanción inmediata.
+                </p>
+
+                <h4>2. Protocolo de Entrada y Salida</h4>
+                <p>• <strong>Registro Individual:</strong> Cada persona debe registrar su entrada y su salida en el
+                    lector. Está prohibido el "tailgating" (entrar detrás de alguien que ya abrió la puerta sin marcar
+                    el propio acceso).</p>
+                <p>• <strong>Verificación de Puerta:</strong> Es responsabilidad del usuario asegurarse de que la puerta
+                    quede completamente cerrada y con el cerrojo activado tras su paso.</p>
+
+                <h4>3. Permanencia y Acompañamiento</h4>
+                <p>• <strong>Personal Externo (Proveedores):</strong> Todo personal externo debe estar acompañado
+                    permanentemente por un responsable interno autorizado. Su acceso biométrico será temporal y caducará
+                    al finalizar la orden de trabajo.</p>
+                <p>• <strong>Tiempo de Estancia:</strong> El acceso solo está permitido durante el tiempo necesario para
+                    realizar la tarea técnica. El Data Center no es un área de descanso ni de almacenamiento de objetos
+                    personales.</p>
+            </div>
+        </section>
+
+        <h3 class="team-title">Nuestros Colaboradores</h3>
+
+        <div class="team-grid">
+            <div class="member-card">
+                <div class="avatar">FH</div>
+                <p class="name">1. Fernando Hernández Hernández</p>
+                <div class="social-links">
+                    <a href="https://www.facebook.com/Inmuebles24" target="_blank">FB</a>
+                    <a href="https://www.linkedin.com/company/real-estate" target="_blank">IN</a>
+                    <a href="mailto:f.hernandez@jaccaf.com">📧</a>
+                </div>
+            </div>
+
+            <div class="member-card">
+                <div class="avatar">AL</div>
+                <p class="name">2. Aldo López Lorenzo</p>
+                <div class="social-links">
+                    <a href="https://twitter.com/Inmuebles24" target="_blank">X</a>
+                    <a href="https://www.instagram.com/realestatemagazine" target="_blank">IG</a>
+                    <a href="mailto:a.lopez@jaccaf.com">📧</a>
+                </div>
+            </div>
+
+            <div class="member-card">
+                <div class="avatar">AS</div>
+                <p class="name">3. Alejandra Serapio Reyes</p>
+                <div class="social-links">
+                    <a href="https://www.linkedin.com" target="_blank">IN</a>
+                    <a href="https://www.tiktok.com/@bienesraices" target="_blank">TK</a>
+                    <a href="mailto:a.serapio@jaccaf.com">📧</a>
+                </div>
+            </div>
+
+            <div class="member-card">
+                <div class="avatar">JM</div>
+                <p class="name">4. Juan Carlos Morales Nicolas</p>
+                <div class="social-links">
+                    <a href="https://www.facebook.com" target="_blank">FB</a>
+                    <a href="https://www.youtube.com/@CasasYTerrenos" target="_blank">YT</a>
+                    <a href="mailto:jc.morales@jaccaf.com">📧</a>
+                </div>
+            </div>
+
+            <div class="member-card highlight">
+                <div class="avatar">CB</div>
+                <p class="name">5. Cristian Bautista Secundino</p>
+                <div class="social-links">
+                    <a href="https://www.linkedin.com" target="_blank">IN</a>
+                    <a href="https://wa.me/5214611209998" target="_blank">WA</a>
+                    <a href="mailto:c.bautista@jaccaf.com">📧</a>
+                </div>
+            </div>
+
+            <div class="member-card">
+                <div class="avatar">CF</div>
+                <p class="name">6. Carlos Joel Francisco Antonio</p>
+                <div class="social-links">
+                    <a href="https://www.instagram.com" target="_blank">IG</a>
+                    <a href="https://twitter.com" target="_blank">X</a>
+                    <a href="mailto:cj.francisco@jaccaf.com">📧</a>
+                </div>
+            </div>
+        </div>
+
+        <div class="company-contact">
+            <p>Email Corporativo: <strong>contacto@jaccaf-company.com</strong></p>
+        </div>
+    </div>
+
+    <footer>
+        <p>Todos los Derechos Reservados. 2026 © JACCAF COMPANY | Práctica de Fin de Curso</p>
+    </footer>
+
+</body>
+
+</html>

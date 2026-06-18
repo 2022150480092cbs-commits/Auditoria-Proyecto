@@ -1,0 +1,490 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Detalle de Ciudad | JACCAF COMPANY</title>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;600;700;800&display=swap"
+        rel="stylesheet">
+
+    <style>
+        /* 1. RESET Y BASES */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Montserrat', sans-serif;
+            text-decoration: none;
+            list-style: none;
+        }
+
+        body {
+            background-color: #f4f6f8;
+            color: #333;
+            line-height: 1.6;
+        }
+
+        /* 2. NAVBAR (Idéntico al estilo oscuro de JACCAF / Casas Platino) */
+        nav {
+            background-color: #1a2a38;
+            /* Azul oscuro corporativo */
+            padding: 20px 5%;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+        }
+
+        .logo {
+            color: white;
+            font-size: 20px;
+            letter-spacing: 2px;
+        }
+
+        .logo span {
+            font-weight: 800;
+        }
+
+        .btn-regresar {
+            color: #00f2d3;
+            font-weight: 700;
+            font-size: 13px;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            border: 1px solid #00f2d3;
+            padding: 8px 16px;
+            border-radius: 4px;
+            transition: 0.3s;
+        }
+
+        .btn-regresar:hover {
+            background-color: #00f2d3;
+            color: #1a2a38;
+        }
+
+        /* 3. HERO HEADER POR CIUDAD */
+        .city-hero {
+            background-color: #1a2a38;
+            color: white;
+            text-align: center;
+            padding: 80px 20px;
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        .city-hero h1 {
+            font-size: 42px;
+            font-weight: 700;
+            margin-bottom: 10px;
+            letter-spacing: 1px;
+        }
+
+        .city-hero p {
+            color: #00f2d3;
+            font-size: 18px;
+            letter-spacing: 2px;
+            font-weight: 600;
+        }
+
+        /* 4. BLOQUE DE 3 COLUMNAS INFORMATIVAS */
+        .info-section {
+            max-width: 1200px;
+            margin: 60px auto;
+            padding: 0 20px;
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+            gap: 30px;
+        }
+
+        .info-column {
+            background: white;
+            padding: 40px 30px;
+            border-radius: 4px;
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.05);
+            text-align: center;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .info-column h3 {
+            font-size: 20px;
+            color: #1a2a38;
+            margin-bottom: 15px;
+            font-weight: 700;
+        }
+
+        .info-column p {
+            font-size: 14px;
+            color: #666;
+            margin-bottom: 25px;
+        }
+
+        .btn-conoce {
+            background-color: #00f2d3;
+            color: #1a2a38;
+            padding: 12px 30px;
+            border-radius: 50px;
+            font-weight: 700;
+            font-size: 13px;
+            margin-bottom: 25px;
+            display: inline-block;
+            transition: 0.3s;
+            box-shadow: 0 4px 15px rgba(0, 242, 211, 0.2);
+        }
+
+        .btn-conoce:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 6px 20px rgba(0, 242, 211, 0.4);
+            background-color: #1a2a38;
+            color: #00f2d3;
+        }
+
+        .column-img {
+            width: 100%;
+            height: 250px;
+            object-fit: cover;
+            border-radius: 4px;
+            display: block;
+        }
+
+        /* 5. BANNER DE DESARROLLO ESPECÍFICO */
+        .desarrollos-section {
+            max-width: 1200px;
+            margin: 60px auto;
+            padding: 0 20px;
+        }
+
+        .desarrollos-section h2 {
+            text-align: center;
+            font-size: 28px;
+            margin-bottom: 40px;
+            color: #1a2a38;
+        }
+
+        .desarrollo-banner {
+            position: relative;
+            height: 400px;
+            border-radius: 4px;
+            overflow: hidden;
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
+        }
+
+        .desarrollo-banner img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        .desarrollo-overlay {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(transparent 40%, rgba(0, 0, 0, 0.8));
+            display: flex;
+            flex-direction: column;
+            justify-content: flex-end;
+            padding: 40px;
+            color: white;
+        }
+
+        .desarrollo-overlay h4 {
+            font-size: 14px;
+            color: #00f2d3;
+            letter-spacing: 3px;
+            text-transform: uppercase;
+            margin-bottom: 5px;
+        }
+
+        .desarrollo-overlay h3 {
+            font-size: 32px;
+            font-weight: 700;
+            margin-bottom: 10px;
+        }
+
+        /* 6. FOOTER CORPORATIVO (Blanco con columnas) */
+        footer {
+            background-color: #ffffff;
+            padding: 60px 5% 30px;
+            border-top: 1px solid #e1e8ed;
+            margin-top: 60px;
+        }
+
+        .footer-content {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: flex;
+            justify-content: space-between;
+            flex-wrap: wrap;
+            gap: 40px;
+            padding-bottom: 40px;
+            border-bottom: 1px solid #e1e8ed;
+        }
+
+        .footer-brand h2 {
+            color: #1a2a38;
+            font-size: 20px;
+            letter-spacing: 2px;
+            margin-bottom: 15px;
+        }
+
+        .footer-links {
+            display: flex;
+            gap: 80px;
+        }
+
+        .footer-col h4 {
+            color: #777;
+            font-size: 14px;
+            text-transform: uppercase;
+            margin-bottom: 20px;
+            letter-spacing: 1px;
+        }
+
+        .footer-col ul {
+            display: flex;
+            flex-direction: column;
+            gap: 12px;
+        }
+
+        .footer-col ul li a {
+            color: #1a2a38;
+            font-size: 14px;
+            font-weight: 600;
+            transition: 0.3s;
+        }
+
+        .footer-col ul li a:hover {
+            color: #00f2d3;
+        }
+
+        .footer-bottom {
+            text-align: center;
+            padding-top: 30px;
+            font-size: 12px;
+            color: #888;
+        }
+    </style>
+</head>
+
+<body>
+
+    <nav>
+        <div class="logo"><span>JACCAF</span> COMPANY</div>
+        <a href="ciudades.html" class="btn-regresar">← Volver a Ciudades</a>
+    </nav>
+
+    <header class="city-hero">
+        <h1 id="lblNombreCiudad">Cargando Ciudad...</h1>
+        <p id="lblLemaCiudad">Por favor espera</p>
+    </header>
+
+    <main class="info-section">
+        <div class="info-column">
+            <div>
+                <h3 id="colTitulo1">Información 1</h3>
+                <p id="colTexto1">Descripción detallada.</p>
+            </div>
+            <a href="#" class="btn-conoce">Conoce más</a>
+            <img id="colImg1" src="" class="column-img" alt="Info 1">
+        </div>
+
+        <div class="info-column">
+            <div>
+                <h3 id="colTitulo2">Información 2</h3>
+                <p id="colTexto2">Descripción detallada.</p>
+            </div>
+            <a href="#" class="btn-conoce">Conoce más</a>
+            <img id="colImg2" src="" class="column-img" alt="Info 2">
+        </div>
+
+        <div class="info-column">
+            <div>
+                <h3 id="colTitulo3">Información 3</h3>
+                <p id="colTexto3">Descripción detallada.</p>
+            </div>
+            <a href="#" class="btn-conoce">Conoce más</a>
+            <img id="colImg3" src="" class="column-img" alt="Info 3">
+        </div>
+    </main>
+
+    <section class="desarrollos-section">
+        <h2>Conoce nuestros desarrollos en <span id="lblCiudadBanner">...</span></h2>
+
+        <div class="desarrollo-banner">
+            <img id="imgDesarrollo" src="" alt="Desarrollo Inmobiliario">
+            <div class="desarrollo-overlay">
+                <h4 id="txtUbicacionDesarrollo">UBICACIÓN</h4>
+                <h3 id="txtNombreDesarrollo">Nombre del Desarrollo</h3>
+            </div>
+        </div>
+    </section>
+
+    <footer>
+        <div class="footer-content">
+            <div class="footer-brand">
+                <h2><span>JACCAF</span> COMPANY</h2>
+                <p style="color: #777; font-size: 14px;">Inversiones inmobiliarias a tu alcance.</p>
+            </div>
+            <div class="footer-links">
+                <div class="footer-col">
+                    <h4>Información</h4>
+                    <ul>
+                        <li><a href="nosotros.html">Nosotros</a></li>
+                        <li><a href="#">Desarrollos</a></li>
+                        <li><a href="ciudades.html">Ciudades</a></li>
+                    </ul>
+                </div>
+                <div class="footer-col">
+                    <h4>Contacto</h4>
+                    <ul>
+                        <li><a href="tel:4611209998">Llámanos</a></li>
+                        <li><a href="mailto:contacto@jaccaf-company.com">Escríbenos</a></li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            <p>Todos los Derechos Reservados. 2026 © JACCAF COMPANY | Práctica de Fin de Curso</p>
+        </div>
+    </footer>
+
+    <script>
+        // 1. Diccionario con la información real extraída de Casas Platino por cada ciudad
+        const infoCiudades = {
+            "san-miguel": {
+                nombre: "San Miguel de Allende",
+                lema: "Cultura y tradición",
+                columnas: [
+                    {
+                        titulo: "Vive San Miguel de Allende, la segunda mejor ciudad del mundo.",
+                        texto: "Según los lectores de la reconocida revista Travel & Leisure, destacando su arquitectura colonial y vibrante vida artística.",
+                        img: "https://media.admagazine.com/photos/618a64f469ed46faf86e31c6/3:2/w_2250,h_1500,c_limit/77486.jpg"
+                    },
+                    {
+                        titulo: "Pero si lo tuyo es el ecoturismo, San Miguel también es tu ciudad.",
+                        texto: "Muy cerca podrás encontrar El Charco del Ingenio, una hermosa reserva natural con 15 paradas en su recorrido e impresionantes vistas.",
+                        img: "https://cdn.contexttravel.com/image/upload/w_1500,q_60/v1760383071/blog/San%20Miguel%202026%20Guide/San%20Miguel%202026%20Guide.png"
+                    },
+                    {
+                        titulo: "Un lugar que combina lo mejor de dos mundos.",
+                        texto: "Modernidad en sus plazas comerciales con tiendas de franquicia internacional, distribuidores viales y una conectividad de primer nivel.",
+                        img: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcT9vv_DTapQf8X_4js9XXkBlfKVKb2Ykpj_7g&s"
+                    }
+                ],
+                desarrollo: {
+                    nombre: "PORTALES",
+                    img: "https://www.liderempresarial.com/wp-content/uploads/2021/09/GQMLTZWR7JHQHBDNPPIWONSK64.jpg"
+                }
+            },
+            "queretaro": {
+                nombre: "Querétaro",
+                lema: "Crecimiento y plusvalía",
+                columnas: [
+                    {
+                        titulo: "Una de las economías más dinámicas de México.",
+                        texto: "Querétaro offers un desarrollo industrial y empresarial sostenido, ideal para asegurar tu patrimonio a largo plazo.",
+                        img: "https://images.unsplash.com/photo-1512813583145-baaa340ef29f?auto=format&fit=crop&w=500&q=80"
+                    },
+                    {
+                        titulo: "Calidad de vida e infraestructura de vanguardia.",
+                        texto: "Rodeado de escuelas de alto nivel, centros comerciales modernos y vías de comunicación que agilizan tus traslados diarios.",
+                        img: "https://images.unsplash.com/photo-1600585154340-be6161a56a0c?auto=format&fit=crop&w=500&q=80"
+                    },
+                    {
+                        titulo: "Historia y modernidad en un solo lugar.",
+                        texto: "Disfruta de su majestuoso acueducto histórico y un centro cultural vibrante sin renunciar al estilo de vida residencial premium.",
+                        img: "https://images.unsplash.com/photo-1542314831-068cd1dbfeeb?auto=format&fit=crop&w=500&q=80"
+                    }
+                ],
+                desarrollo: {
+                    nombre: "RESIDENCIAL LOS ARCOS",
+                    img: "https://images.unsplash.com/photo-1600596542815-ffad4c1539a9?auto=format&fit=crop&w=1200&q=80"
+                }
+            },
+            "hermosillo": {
+                nombre: "Hermosillo",
+                lema: "Modernidad en el norte",
+                columnas: [
+                    {
+                        titulo: "El corazón económico de Sonora.",
+                        texto: "Hermosillo destaca por su empuje comercial, seguridad y planeación urbana, consolidándose como una excelente opción residencial.",
+                        img: "https://images.unsplash.com/photo-1569336415962-a4bd9f69cd83?auto=format&fit=crop&w=500&q=80"
+                    },
+                    {
+                        titulo: "Espacios amplios y designs vanguardistas.",
+                        texto: "Nuestros desarrollos están diseñados para ofrecer frescura, confort y sistemas de aislamiento térmico de última generación.",
+                        img: "https://images.unsplash.com/photo-1512917774080-9991f1c4c750?auto=format&fit=crop&w=500&q=80"
+                    },
+                    {
+                        titulo: "Conectividad estratégica y negocios.",
+                        texto: "Ubicación ideal para ejecutivos y familias que buscan cercanía con los centros de negocios y la frontera norte.",
+                        img: "https://images.unsplash.com/photo-1486406146926-c627a92ad1ab?auto=format&fit=crop&w=500&q=80"
+                    }
+                ],
+                desarrollo: {
+                    nombre: "KINO RESIDENCIAL",
+                    img: "https://images.unsplash.com/photo-1600607687939-ce8a6c25118c?auto=format&fit=crop&w=1200&q=80"
+                }
+            },
+            "celaya": {
+                nombre: "Celaya",
+                lema: "Ubicación privilegiada y confort",
+                columnas: [
+                    {
+                        titulo: "Inspirada en las nuevas tendencias Premium.",
+                        texto: "Privacidad, exclusividad y control de acceso biométrico inteligente para la tranquilidad total de tu familia en la ciudad.",
+                        img: "https://images.unsplash.com/photo-1597075095400-f966141a0e10?auto=format&fit=crop&w=500&q=80"
+                    },
+                    {
+                        titulo: "Amenidades completas cerca de ti.",
+                        texto: "Zonas de esparcimiento que incluyen alberca, áreas verdes, terraza techada y juegos infantiles sin salir de casa.",
+                        img: "https://casasplatino.com/wp-content/uploads/2024/11/Pescara_Alberca.jpg"
+                    },
+                    {
+                        titulo: "Entorno natural y diseño sustentable.",
+                        texto: "Viviendas rodeadas de áreas verdes interiores en todo su diseño, fomentando una convivencia placentera y un aire limpio.",
+                        img: "https://i0.wp.com/raspberrymag.com/wp-content/uploads/2022/01/lareserva_galeria05.jpg?ssl=1"
+                    }
+                ],
+                desarrollo: {
+                    nombre: "LA RESERVA (MODELO BARI)",
+                    img: "https://images.unsplash.com/photo-1600585154526-990dced4db0d?auto=format&fit=crop&w=1200&q=80"
+                }
+            }
+        };
+
+        // 2. Leer los parámetros de la URL para saber qué ciudad renderizar
+        const urlParams = new URLSearchParams(window.location.search);
+        const ciudadId = urlParams.get('id') || "san-miguel"; // San Miguel por defecto
+
+        const datos = infoCiudades[ciudadId];
+
+        if (datos) {
+            // Inyectar datos en la cabecera
+            document.getElementById("lblNombreCiudad").innerText = datos.nombre;
+            document.getElementById("lblLemaCiudad").innerText = datos.lema;
+            document.getElementById("lblCiudadBanner").innerText = datos.nombre;
+
+            // Inyectar datos en las 3 columnas
+            for (let i = 0; i < 3; i++) {
+                document.getElementById(`colTitulo${i + 1}`).innerText = datos.columnas[i].titulo;
+                document.getElementById(`colTexto${i + 1}`).innerText = datos.columnas[i].texto;
+                document.getElementById(`colImg${i + 1}`).src = datos.columnas[i].img;
+            }
+
+            // Inyectar datos del desarrollo del banner inferior
+            document.getElementById("txtNombreDesarrollo").innerText = datos.desarrollo.nombre;
+            document.getElementById("txtUbicacionDesarrollo").innerText = datos.nombre.toUpperCase();
+            document.getElementById("imgDesarrollo").src = datos.desarrollo.img;
+        }
+    </script>
+</body>
+
+</html>

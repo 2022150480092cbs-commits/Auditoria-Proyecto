@@ -1,0 +1,216 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Auditoría de Ventas | JACCAF COMPANY</title>
+
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700;800&display=swap" rel="stylesheet">
+
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Montserrat', sans-serif;
+        }
+
+        body {
+            background-color: #f4f6f8;
+            color: #333;
+            line-height: 1.6;
+        }
+
+        /* Navbar corporativo con la identidad visual de JACCAF */
+        nav {
+            background-color: #1a2a38;
+            /* Azul oscuro oficial */
+            padding: 20px 5%;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            color: white;
+        }
+
+        nav h1 {
+            font-size: 22px;
+            letter-spacing: 2px;
+        }
+
+        nav h1 span {
+            font-weight: 800;
+        }
+
+        .btn-regresar {
+            color: #00f2d3;
+            /* Turquesa oficial */
+            text-decoration: none;
+            font-weight: 700;
+            font-size: 14px;
+            border: 1px solid #00f2d3;
+            padding: 8px 16px;
+            border-radius: 4px;
+            transition: 0.3s;
+        }
+
+        .btn-regresar:hover {
+            background-color: #00f2d3;
+            color: #1a2a38;
+        }
+
+        .container {
+            max-width: 1100px;
+            margin: 40px auto;
+            padding: 0 20px;
+        }
+
+        .control-panel {
+            background: white;
+            padding: 30px;
+            border-radius: 8px;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.05);
+            margin-bottom: 30px;
+            text-align: center;
+        }
+
+        .btn-ia {
+            background-color: #00f2d3;
+            color: #000;
+            padding: 14px 30px;
+            border: none;
+            border-radius: 50px;
+            font-weight: 700;
+            font-size: 15px;
+            cursor: pointer;
+            box-shadow: 0 4px 10px rgba(0, 242, 211, 0.3);
+            transition: 0.3s;
+        }
+
+        .btn-ia:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 6px 15px rgba(0, 242, 211, 0.5);
+        }
+
+        .btn-ia:disabled {
+            background-color: #cccccc;
+            box-shadow: none;
+            cursor: not-allowed;
+        }
+
+        /* Tablero de resultados */
+        .dashboard-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 25px;
+            margin-bottom: 30px;
+        }
+
+        .card {
+            background: white;
+            padding: 25px;
+            border-radius: 8px;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.05);
+            border-top: 4px solid #1a2a38;
+        }
+
+        .card.accent {
+            border-top: 4px solid #00f2d3;
+        }
+
+        .card h3 {
+            font-size: 16px;
+            color: #777;
+            text-transform: uppercase;
+            margin-bottom: 10px;
+            letter-spacing: 1px;
+        }
+
+        .card-value {
+            font-size: 32px;
+            font-weight: 700;
+            color: #1a2a38;
+        }
+
+        .chart-section {
+            background: white;
+            padding: 30px;
+            border-radius: 8px;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.05);
+            margin-bottom: 30px;
+        }
+
+        .dictamen-box {
+            background: #1e2f3e;
+            color: white;
+            padding: 30px;
+            border-radius: 8px;
+            border-left: 6px solid #00f2d3;
+        }
+
+        .dictamen-box h3 {
+            color: #00f2d3;
+            margin-bottom: 10px;
+        }
+
+        .dictamen-box p {
+            font-size: 15px;
+            line-height: 1.7;
+            color: #cfd8dc;
+            font-style: italic;
+        }
+
+        .hidden {
+            display: none;
+        }
+    </style>
+</head>
+
+<body>
+
+    <nav>
+        <h1><span>JACCAF</span> COMPANY</h1>
+        <a href="index.html" class="btn-regresar">← Volver al Inicio</a>
+    </nav>
+
+    <div class="container">
+        <div class="control-panel">
+            <h2 style="margin-bottom: 10px; color: #1a2a38;">Auditoría Financiera Inteligente</h2>
+            <p style="color: #666; margin-bottom: 20px;">Presiona el botón para procesar de forma automatizada las
+                métricas de rendimiento y ventas con Inteligencia Artificial.</p>
+            <button id="btnAuditar" class="btn-ia" onclick="ejecutarAuditoriaIA()">⚡ Ejecutar Auditoría
+                Financiera</button>
+        </div>
+
+        <div id="dashboardResultados" class="hidden">
+            <div class="dashboard-grid">
+                <div class="card">
+                    <h3>Ganancia Total Acumulada</h3>
+                    <div id="txtGanancia" class="card-value">$0.00</div>
+                </div>
+                <div class="card accent">
+                    <h3>Margen de Utilidad Promedio</h3>
+                    <div id="txtMargen" class="card-value">0%</div>
+                </div>
+            </div>
+
+            <div class="chart-section">
+                <h3 style="margin-bottom: 20px; color: #1a2a38;">Comparativa Analítica: Costo vs. Precio de Venta</h3>
+                <div style="position: relative; height:300px; width:100%">
+                    <canvas id="graficaVentasIA"></canvas>
+                </div>
+            </div>
+
+            <div class="dictamen-box">
+                <h3>📜 Dictamen del Auditor de Inteligencia Artificial</h3>
+                <p id="txtDictamen">Procesando veredicto...</p>
+            </div>
+        </div>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+
+</html>

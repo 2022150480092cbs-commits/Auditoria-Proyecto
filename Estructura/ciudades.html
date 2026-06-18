@@ -1,0 +1,332 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ciudades | JACCAF COMPANY</title>
+
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;600;700;800&display=swap"
+        rel="stylesheet">
+
+    <style>
+        /* 1. RESET Y BASES */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Montserrat', sans-serif;
+            text-decoration: none;
+            list-style: none;
+        }
+
+        body {
+            background-color: #f4f6f8;
+            color: #333;
+            line-height: 1.6;
+        }
+
+        /* 2. NAVBAR (Idéntico al estilo oscuro de JACCAF / Casas Platino) */
+        nav {
+            background-color: #1a2a38;
+            /* Azul oscuro corporativo */
+            padding: 20px 5%;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+        }
+
+        .logo {
+            color: white;
+            font-size: 20px;
+            letter-spacing: 2px;
+        }
+
+        .logo span {
+            font-weight: 800;
+        }
+
+        nav ul {
+            display: flex;
+            gap: 25px;
+            align-items: center;
+        }
+
+        nav ul li a {
+            color: #ffffff;
+            font-size: 13px;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            transition: 0.3s;
+        }
+
+        nav ul li a:hover,
+        nav ul li a.active {
+            color: #00f2d3;
+            /* Turquesa oficial */
+        }
+
+        /* 3. GRID DE CIUDADES (Estilo mosaico premium) */
+        .main-container {
+            max-width: 1200px;
+            margin: 50px auto;
+            padding: 0 20px;
+        }
+
+        .ciudades-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(450px, 1fr));
+            gap: 30px;
+            margin-bottom: 50px;
+        }
+
+        .ciudad-card {
+            position: relative;
+            height: 350px;
+            border-radius: 4px;
+            overflow: hidden;
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
+            cursor: pointer;
+        }
+
+        .ciudad-card img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.6s ease;
+        }
+
+        /* Efecto Zoom de Casas Platino */
+        .ciudad-card:hover img {
+            transform: scale(1.08);
+        }
+
+        /* Capa oscura superpuesta para el texto */
+        .ciudad-overlay {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(transparent 50%, rgba(0, 0, 0, 0.7));
+            display: flex;
+            align-items: flex-end;
+            padding: 40px;
+        }
+
+        .ciudad-overlay h2 {
+            color: #ffffff;
+            font-size: 28px;
+            font-weight: 700;
+            letter-spacing: 1px;
+        }
+
+        /* 4. SECCIÓN BANNER DE CONTACTO (Turquesa Llamativo) */
+        .contacto-banner {
+            background-image: linear-gradient(rgba(26, 42, 56, 0.85), rgba(26, 42, 56, 0.85)),
+                url('https://images.unsplash.com/photo-1600585154340-be6161a56a0c?auto=format&fit=crop&w=1350&q=80');
+            background-size: cover;
+            background-position: center;
+            padding: 60px 5%;
+            text-align: center;
+            color: white;
+            border-radius: 8px;
+            margin-bottom: 50px;
+        }
+
+        .contacto-banner h3 {
+            font-size: 32px;
+            font-weight: 700;
+            margin-bottom: 30px;
+        }
+
+        .ctas-container {
+            display: flex;
+            justify-content: center;
+            flex-wrap: wrap;
+            gap: 20px;
+        }
+
+        .cta-box {
+            background-color: #00f2d3;
+            color: #1a2a38;
+            padding: 15px 30px;
+            border-radius: 50px;
+            font-weight: 700;
+            font-size: 14px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            transition: 0.3s ease;
+            box-shadow: 0 4px 15px rgba(0, 242, 211, 0.2);
+        }
+
+        .cta-box:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 6px 20px rgba(0, 242, 211, 0.4);
+            background-color: #ffffff;
+        }
+
+        /* 5. FOOTER CORPORATIVO (Blanco con columnas) */
+        footer {
+            background-color: #ffffff;
+            padding: 60px 5% 30px;
+            border-top: 1px solid #e1e8ed;
+        }
+
+        .footer-content {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: flex;
+            justify-content: space-between;
+            flex-wrap: wrap;
+            gap: 40px;
+            padding-bottom: 40px;
+            border-bottom: 1px solid #e1e8ed;
+        }
+
+        .footer-brand h2 {
+            color: #1a2a38;
+            font-size: 20px;
+            letter-spacing: 2px;
+            margin-bottom: 15px;
+        }
+
+        .footer-links {
+            display: flex;
+            gap: 80px;
+        }
+
+        .footer-col h4 {
+            color: #777;
+            font-size: 14px;
+            text-transform: uppercase;
+            margin-bottom: 20px;
+            letter-spacing: 1px;
+        }
+
+        .footer-col ul {
+            display: flex;
+            flex-direction: column;
+            gap: 12px;
+        }
+
+        .footer-col ul li a {
+            color: #1a2a38;
+            font-size: 14px;
+            font-weight: 600;
+            transition: 0.3s;
+        }
+
+        .footer-col ul li a:hover {
+            color: #00f2d3;
+        }
+
+        .footer-bottom {
+            text-align: center;
+            padding-top: 30px;
+            font-size: 12px;
+            color: #888;
+        }
+    </style>
+</head>
+
+<body>
+
+    <nav>
+        <div class="logo"><span>JACCAF</span> COMPANY</div>
+        <ul>
+            <li><a href="../index.html">Inicio</a></li>
+            <li><a href="nosotros.html">Nosotros</a></li>
+            <li><a href="#">Desarrollos</a></li>
+            <li><a href="ciudades.html" class="active">Ciudades</a></li>
+            <li><a href="analiticas.html">Auditoría IA</a></li>
+        </ul>
+    </nav>
+
+    <div class="main-container">
+
+        <div class="ciudades-grid">
+
+            <a href="ciudad-detalle.html?id=san-miguel" class="ciudad-card">
+                <img src="https://i.ytimg.com/vi/o3VJPphPZKk/sddefault.jpg" alt="San Miguel de Allende">
+                <div class="ciudad-overlay">
+                    <h2>San Miguel de Allende</h2>
+                </div>
+            </a>
+
+            <a href="ciudad-detalle.html?id=queretaro" class="ciudad-card">
+                <img src="https://www.liderempresarial.com/wp-content/uploads/2021/07/20191014_fotodeldia_acueducto-e1626273371399.jpeg"
+                    alt="Querétaro">
+                <div class="ciudad-overlay">
+                    <h2>Querétaro</h2>
+                </div>
+            </a>
+
+            <a href="ciudad-detalle.html?id=hermosillo" class="ciudad-card">
+                <img src="https://casasplatino.com/wp-content/uploads/2020/06/hermosillo1.jpg" alt="Hermosillo">
+                <div class="ciudad-overlay">
+                    <h2>Hermosillo</h2>
+                </div>
+            </a>
+
+            <a href="ciudad-detalle.html?id=celaya" class="ciudad-card">
+                <img src="https://visitmexico.com/media/usercontent/6800573aaf44a-cly-cover-1920x1080_gmxdot_jpg"
+                    alt="Celaya">
+                <div class="ciudad-overlay">
+                    <h2>Celaya</h2>
+                </div>
+            </a>
+
+        </div>
+    </div>
+    </div>
+
+    <div class="contacto-banner">
+        <h3>Conoce nuestros desarrollos de primer nivel</h3>
+        <div class="ctas-container">
+            <a href="tel:4611209998" class="cta-box">📞 ¿Tienes dudas? Llámanos</a>
+            <a href="mailto:contacto@jaccaf-company.com" class="cta-box">✉️ Escríbenos</a>
+            <a href="#" class="cta-box">📝 Solicitar información</a>
+        </div>
+    </div>
+
+    </div>
+
+    <footer>
+        <div class="footer-content">
+            <div class="footer-brand">
+                <h2><span>JACCAF</span> COMPANY</h2>
+                <p style="color: #777; font-size: 14px;">Inversiones inmobiliarias a tu alcance.</p>
+            </div>
+            <div class="footer-links">
+                <div class="footer-col">
+                    <h4>Información</h4>
+                    <ul>
+                        <li><a href="nosotros.html">Nosotros</a></li>
+                        <li><a href="#">Desarrollos</a></li>
+                        <li><a href="ciudades.html">Ciudades</a></li>
+                    </ul>
+                </div>
+                <div class="footer-col">
+                    <h4>Contacto</h4>
+                    <ul>
+                        <li><a href="tel:4611209998">Llámanos</a></li>
+                        <li><a href="mailto:contacto@jaccaf-company.com">Escríbenos</a></li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            <p>Todos los Derechos Reservados. 2026 © JACCAF COMPANY | Práctica de Fin de Curso</p>
+        </div>
+    </footer>
+
+</body>
+
+</html>

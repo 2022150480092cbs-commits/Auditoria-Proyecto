@@ -1,0 +1,344 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Desarrollos | JACCAF COMPANY</title>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;600;700;800&display=swap"
+        rel="stylesheet">
+
+    <style>
+        /* 1. RESET Y BASES */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Montserrat', sans-serif;
+            text-decoration: none;
+            list-style: none;
+        }
+
+        body {
+            background-color: #f4f6f8;
+            color: #333;
+            line-height: 1.6;
+        }
+
+        /* 2. NAVBAR CORPORATIVO */
+        nav {
+            background-color: #1a2a38;
+            /* Azul oscuro oficial */
+            padding: 20px 5%;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+        }
+
+        .logo {
+            color: white;
+            font-size: 20px;
+            letter-spacing: 2px;
+        }
+
+        .logo span {
+            font-weight: 800;
+        }
+
+        nav ul {
+            display: flex;
+            gap: 25px;
+            align-items: center;
+        }
+
+        nav ul li a {
+            color: #ffffff;
+            font-size: 13px;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            transition: 0.3s;
+        }
+
+        nav ul li a:hover,
+        nav ul li a.active {
+            color: #00f2d3;
+            /* Turquesa oficial */
+        }
+
+        /* 3. HERO HEADER Minimalista */
+        header {
+            background-color: #1a2a38;
+            color: white;
+            padding: 70px 20px;
+            text-align: center;
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        header h1 {
+            font-size: 38px;
+            font-weight: 800;
+            letter-spacing: 3px;
+            margin-bottom: 10px;
+        }
+
+        header p {
+            color: #00f2d3;
+            font-size: 14px;
+            letter-spacing: 2px;
+            font-weight: 600;
+            text-transform: uppercase;
+        }
+
+        /* 4. CONTENEDOR DE DESARROLLOS */
+        .container {
+            max-width: 1200px;
+            margin: 50px auto;
+            padding: 0 20px;
+        }
+
+        .desarrollos-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+            gap: 35px;
+            margin-bottom: 60px;
+        }
+
+        /* Tarjeta de Fraccionamiento (Clon de Casas Platino) */
+        .desarrollo-card {
+            background: #ffffff;
+            border-radius: 6px;
+            overflow: hidden;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.05);
+            display: flex;
+            flex-direction: column;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+
+        .desarrollo-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 15px 35px rgba(0, 0, 0, 0.1);
+        }
+
+        .img-container {
+            position: relative;
+            height: 260px;
+            width: 100%;
+            overflow: hidden;
+        }
+
+        .img-container img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.5s ease;
+        }
+
+        .desarrollo-card:hover .img-container img {
+            transform: scale(1.05);
+        }
+
+        /* Etiqueta de Estado (Pre-venta / Últimas Casas) */
+        .badge-status {
+            position: absolute;
+            top: 15px;
+            left: 15px;
+            background-color: #00f2d3;
+            color: #1a2a38;
+            padding: 6px 14px;
+            font-size: 11px;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            border-radius: 30px;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.15);
+        }
+
+        .info-container {
+            padding: 25px;
+            display: flex;
+            flex-direction: column;
+            flex-grow: 1;
+            justify-content: space-between;
+        }
+
+        .location {
+            font-size: 11px;
+            color: #777;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            font-weight: 600;
+            margin-bottom: 5px;
+        }
+
+        .title {
+            font-size: 22px;
+            color: #1a2a38;
+            font-weight: 700;
+            margin-bottom: 12px;
+        }
+
+        .description {
+            font-size: 14px;
+            color: #555;
+            margin-bottom: 20px;
+            line-height: 1.6;
+            text-align: justify;
+        }
+
+        .btn-conoce {
+            background-color: #1a2a38;
+            color: #00f2d3;
+            border: 2px solid #1a2a38;
+            padding: 12px 20px;
+            border-radius: 4px;
+            font-weight: 700;
+            font-size: 13px;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            text-align: center;
+            transition: 0.3s;
+        }
+
+        .btn-conoce:hover {
+            background-color: #00f2d3;
+            color: #1a2a38;
+            border-color: #00f2d3;
+            box-shadow: 0 5px 15px rgba(0, 242, 211, 0.3);
+        }
+
+        /* 5. FOOTER CORPORATIVO */
+        footer {
+            background-color: #ffffff;
+            padding: 40px 5% 30px;
+            border-top: 1px solid #e1e8ed;
+        }
+
+        .footer-content {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: flex;
+            justify-content: space-between;
+            flex-wrap: wrap;
+            gap: 40px;
+        }
+
+        .footer-brand h2 {
+            color: #1a2a38;
+            font-size: 20px;
+            letter-spacing: 2px;
+        }
+
+        .footer-brand h2 span {
+            font-weight: 800;
+        }
+
+        .footer-bottom {
+            text-align: center;
+            padding-top: 30px;
+            margin-top: 30px;
+            border-top: 1px solid #e1e8ed;
+            font-size: 12px;
+            color: #888;
+        }
+    </style>
+</head>
+
+<body>
+
+    <nav>
+        <div class="logo"><span>JACCAF</span> COMPANY</div>
+        <ul>
+            <li><a href="../index.html">Inicio</a></li>
+            <li><a href="nosotros.html">Nosotros</a></li>
+            <li><a href="desarrollos.html" class="active">Desarrollos</a></li>
+            <li><a href="ciudades.html">Ciudades</a></li>
+            <li><a href="analiticas.html">Auditoría IA</a></li>
+        </ul>
+    </nav>
+
+    <header>
+        <h1>NUESTROS DESARROLLOS</h1>
+        <p>Encuentra el espacio ideal para consolidar tu patrimonio</p>
+    </header>
+
+    <div class="container">
+        <div class="desarrollos-grid">
+
+            <div class="desarrollo-card">
+                <div class="img-container">
+                    <span class="badge-status">Últimas Casas</span>
+                    <img src="https://images.unsplash.com/photo-1584622650111-993a426fbf0a?auto=format&fit=crop&w=800&q=80"
+                        alt="Residencial La Reserva">
+                </div>
+                <div class="info-container">
+                    <div>
+                        <div class="location">Celaya, Guanajuato</div>
+                        <div class="title">Residencial La Reserva</div>
+                        <div class="description">Privada exclusiva con amenidades premium. Cuenta con alberca templada,
+                            terraza techada, áreas verdes y sistemas de seguridad de vanguardia mediante control de
+                            acceso biométrico inteligente.</div>
+                    </div>
+                    <a href="ciudad-detalle.html?id=celaya" class="btn-conoce">Conoce más</a>
+                </div>
+            </div>
+
+            <div class="desarrollo-card">
+                <div class="img-container">
+                    <span class="badge-status">Pre-Venta</span>
+                    <img src="https://images.unsplash.com/photo-1584622781564-1d987f7333c1?auto=format&fit=crop&w=800&q=80"
+                        alt="Portales Residencial">
+                </div>
+                <div class="info-container">
+                    <div>
+                        <div class="location">San Miguel de Allende</div>
+                        <div class="title">Portales Residencial</div>
+                        <div class="description">Un entorno inspirado en la magia colonial y artística. Diseños
+                            arquitectónicos de primer nivel, amplias avenidas empedradas y una casa club con vistas
+                            panorámicas espectaculares.</div>
+                    </div>
+                    <a href="ciudad-detalle.html?id=san-miguel" class="btn-conoce">Conoce más</a>
+                </div>
+            </div>
+
+            <div class="desarrollo-card">
+                <div class="img-container">
+                    <span class="badge-status">Entrega Inmediata</span>
+                    <img src="https://images.unsplash.com/photo-1600596542815-ffad4c1539a9?auto=format&fit=crop&w=800&q=80"
+                        alt="Residencial Los Arcos">
+                </div>
+                <div class="info-container">
+                    <div>
+                        <div class="location">Querétaro, Qro.</div>
+                        <div class="title">Residencial Los Arcos</div>
+                        <div class="description">Ubicación estratégica con la mayor plusvalía del bajío. Conectividad
+                            directa con centros empresariales, escuelas de prestigio y zonas comerciales exclusivas.
+                        </div>
+                    </div>
+                    <a href="ciudad-detalle.html?id=queretaro" class="btn-conoce">Conoce más</a>
+                </div>
+            </div>
+
+        </div>
+    </div>
+
+    <footer>
+        <div class="footer-content">
+            <div class="footer-brand">
+                <h2><span>JACCAF</span> COMPANY</h2>
+                <p style="color: #777; font-size: 14px; margin-top: 10px;">Inversiones inmobiliarias a tu alcance de
+                    forma segura.</p>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            <p>Todos los Derechos Reservados. 2026 © JACCAF COMPANY | Práctica de Fin de Curso</p>
+        </div>
+    </footer>
+
+</body>
+
+</html>

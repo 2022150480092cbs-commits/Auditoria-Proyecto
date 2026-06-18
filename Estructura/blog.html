@@ -1,0 +1,466 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Blog | JACCAF COMPANY</title>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;600;700;800&display=swap"
+        rel="stylesheet">
+
+    <style>
+        /* 1. RESET Y BASES */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Montserrat', sans-serif;
+            text-decoration: none;
+            list-style: none;
+        }
+
+        body {
+            background-color: #ffffff;
+            color: #333;
+            line-height: 1.6;
+        }
+
+        /* 2. NAVBAR CORPORATIVO OFICIAL */
+        nav {
+            background-color: #1a2a38;
+            padding: 20px 5%;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+        }
+
+        .logo {
+            color: white;
+            font-size: 20px;
+            letter-spacing: 2px;
+        }
+
+        .logo span {
+            font-weight: 800;
+        }
+
+        nav ul {
+            display: flex;
+            gap: 25px;
+            align-items: center;
+        }
+
+        nav ul li a {
+            color: #ffffff;
+            font-size: 13px;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            transition: 0.3s;
+        }
+
+        nav ul li a:hover,
+        nav ul li a.active {
+            color: #00f2d3;
+        }
+
+        /* 3. HERO BANNER PRINCIPAL */
+        header {
+            background-color: #1a2a38;
+            color: white;
+            padding: 70px 20px;
+            text-align: center;
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        header h1 {
+            font-size: 3.5rem;
+            font-weight: 800;
+            letter-spacing: 5px;
+            margin-bottom: 10px;
+        }
+
+        header p {
+            color: #00f2d3;
+            font-size: 14px;
+            letter-spacing: 2px;
+            font-weight: 600;
+            text-transform: uppercase;
+        }
+
+        /* 4. LAYOUT ASIMÉTRICO (Clon Real de Casas Platino) */
+        .blog-layout {
+            max-width: 1200px;
+            margin: 60px auto;
+            padding: 0 20px;
+            display: flex;
+            gap: 50px;
+            /* Separación amplia entre artículos y barra lateral */
+        }
+
+        /* Columna Izquierda: Los Artículos */
+        .articles-container {
+            flex: 2;
+            /* Ocupa el doble de espacio */
+            display: flex;
+            flex-direction: column;
+            gap: 40px;
+        }
+
+        /* Tarjeta Horizontal */
+        .blog-row-card {
+            display: flex;
+            background: #ffffff;
+            border-radius: 4px;
+            overflow: hidden;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.05);
+            transition: transform 0.3s ease;
+        }
+
+        .blog-row-card:hover {
+            transform: translateY(-3px);
+        }
+
+        .card-img-side {
+            width: 40%;
+            /* La foto va de un lado fijo */
+            min-height: 250px;
+            overflow: hidden;
+        }
+
+        .card-img-side img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        .card-text-side {
+            width: 60%;
+            padding: 30px;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+        }
+
+        .date {
+            font-size: 11px;
+            color: #00f2d3;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            margin-bottom: 8px;
+        }
+
+        .title {
+            font-size: 22px;
+            color: #1a2a38;
+            font-weight: 700;
+            line-height: 1.4;
+            margin-bottom: 15px;
+        }
+
+        .excerpt {
+            font-size: 14px;
+            color: #666;
+            text-align: justify;
+            margin-bottom: 20px;
+        }
+
+        .btn-leer {
+            color: #1a2a38;
+            border: 2px solid #1a2a38;
+            padding: 10px 22px;
+            font-weight: 700;
+            font-size: 12px;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            align-self: flex-start;
+            border-radius: 4px;
+            transition: 0.3s;
+        }
+
+        .btn-leer:hover {
+            background-color: #00f2d3;
+            border-color: #00f2d3;
+            box-shadow: 0 4px 15px rgba(0, 242, 211, 0.3);
+        }
+
+        /* Columna Derecha: Barra Lateral (Sidebar Fijo) */
+        .sidebar-container {
+            flex: 1;
+            /* Más angosta */
+            display: flex;
+            flex-direction: column;
+            gap: 30px;
+            border-left: 1px solid #e1e8ed;
+            padding-left: 40px;
+            height: fit-content;
+        }
+
+        .sidebar-widget {
+            background: #f8f9fa;
+            padding: 30px 25px;
+            border-radius: 4px;
+            border-top: 4px solid #1a2a38;
+        }
+
+        .sidebar-widget h3 {
+            color: #1a2a38;
+            font-size: 18px;
+            margin-bottom: 20px;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        .sidebar-widget ul {
+            display: flex;
+            flex-direction: column;
+            gap: 15px;
+        }
+
+        .sidebar-widget ul li a {
+            color: #444;
+            font-size: 14px;
+            font-weight: 600;
+            transition: 0.3s;
+        }
+
+        .sidebar-widget ul li a:hover {
+            color: #00f2d3;
+        }
+
+        /* Widget de Contacto Directo estilo Turquesa */
+        .widget-cta {
+            background-color: #1a2a38;
+            color: white;
+            text-align: center;
+            padding: 35px 25px;
+            border-radius: 4px;
+            border-top: 4px solid #00f2d3;
+        }
+
+        .widget-cta h4 {
+            font-size: 20px;
+            margin-bottom: 15px;
+            color: #ffffff;
+        }
+
+        .btn-widget-contact {
+            display: block;
+            background-color: #00f2d3;
+            color: #1a2a38;
+            padding: 12px;
+            border-radius: 50px;
+            font-weight: 700;
+            font-size: 13px;
+            margin-top: 15px;
+            transition: 0.3s;
+        }
+
+        .btn-widget-contact:hover {
+            background-color: white;
+            transform: scale(1.02);
+        }
+
+        /* 5. FOOTER CORPORATIVO (Blanco con columnas) */
+        footer {
+            background-color: #ffffff;
+            padding: 60px 5% 30px;
+            border-top: 1px solid #e1e8ed;
+        }
+
+        .footer-content {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: flex;
+            justify-content: space-between;
+            flex-wrap: wrap;
+            gap: 40px;
+            padding-bottom: 40px;
+            border-bottom: 1px solid #e1e8ed;
+        }
+
+        .footer-brand h2 {
+            color: #1a2a38;
+            font-size: 20px;
+            letter-spacing: 2px;
+            margin-bottom: 15px;
+        }
+
+        .footer-links {
+            display: flex;
+            gap: 80px;
+        }
+
+        .footer-col h4 {
+            color: #777;
+            font-size: 14px;
+            text-transform: uppercase;
+            margin-bottom: 20px;
+            letter-spacing: 1px;
+        }
+
+        .footer-col ul {
+            display: flex;
+            flex-direction: column;
+            gap: 12px;
+        }
+
+        .footer-col ul li a {
+            color: #1a2a38;
+            font-size: 14px;
+            font-weight: 600;
+            transition: 0.3s;
+        }
+
+        .footer-col ul li a:hover {
+            color: #00f2d3;
+        }
+
+        .footer-bottom {
+            text-align: center;
+            padding-top: 30px;
+            font-size: 12px;
+            color: #888;
+        }
+    </style>
+</head>
+
+<body>
+
+    <nav>
+        <div class="logo"><span>JACCAF</span> COMPANY</div>
+        <ul>
+            <li><a href="../index.html">Inicio</a></li>
+            <li><a href="nosotros.html">Nosotros</a></li>
+            <li><a href="desarrollos.html">Desarrollos</a></li>
+            <li><a href="ciudades.html">Ciudades</a></li>
+            <li><a href="blog.html" class="active">Blog</a></li>
+            <li><a href="analiticas.html">Auditoría IA</a></li>
+        </ul>
+    </nav>
+
+    <header>
+        <h1>NUESTRO BLOG</h1>
+        <p>Consejos, tendencias y guías del mercado inmobiliario</p>
+    </header>
+
+    <div class="blog-layout">
+
+        <main class="articles-container">
+
+            <article class="blog-row-card">
+                <div class="card-img-side">
+                    <img src="https://images.unsplash.com/photo-1560518883-ce09059eeffa?auto=format&fit=crop&w=600&q=80"
+                        alt="Inversión">
+                </div>
+                <div class="card-text-side">
+                    <div>
+                        <div class="date">18 de Junio, 2026</div>
+                        <h2 class="title">Por qué el Crowdfunding es el futuro inmobiliario</h2>
+                        <p class="excerpt">Descubre cómo los modelos de financiamiento colectivo implementados por
+                            JACCAF COMPANY permiten construir patrimonio sólido con inversiones seguras y accesibles.
+                        </p>
+                    </div>
+                    <a href="https://www.rocketmortgage.com/es/learn/crowdfunding-inmobiliario" class="btn-leer">Leer
+                        Artículo</a>
+                </div>
+            </article>
+
+            <article class="blog-row-card">
+                <div class="card-img-side">
+                    <img src="https://images.unsplash.com/photo-1558002038-1055907df827?auto=format&fit=crop&w=600&q=80"
+                        alt="Hogar">
+                </div>
+                <div class="card-text-side">
+                    <div>
+                        <div class="date">12 de Junio, 2026</div>
+                        <h2 class="title">Biometría y domótica en Residencial La Reserva</h2>
+                        <p class="excerpt">Analizamos las ventajas de integrar accesos biométricos de reconocimiento
+                            facial y automatización en los condominios para elevar la seguridad familiar.</p>
+                    </div>
+                    <a href="https://cedia.org/es/propietarios/conocimiento/que-es-la-seguridad-biometrica-para-el-hogar/"
+                        class="btn-leer">Leer Artículo</a>
+                </div>
+            </article>
+
+            <article class="blog-row-card">
+                <div class="card-img-side">
+                    <img src="https://images.unsplash.com/photo-1542314831-068cd1dbfeeb?auto=format&fit=crop&w=600&q=80"
+                        alt="Plusvalía">
+                </div>
+                <div class="card-text-side">
+                    <div>
+                        <div class="date">01 de Junio, 2026</div>
+                        <h2 class="title">El boom de la plusvalía en el Bajío mexicano</h2>
+                        <p class="excerpt">Un análisis detallado sobre el dinámico crecimiento industrial y residencial
+                            de zonas clave del bajío, y por qué se han consolidado como destinos ideales.</p>
+                    </div>
+                    <a href="https://blog.gruposinow.com/san-luis-potosi-y-queretaro-plusvalia-en-terrenos-bajio-2025.php"
+                        class="btn-leer">Leer Artículo</a>
+                </div>
+            </article>
+
+        </main>
+
+        <aside class="sidebar-container">
+
+            <div class="sidebar-widget">
+                <h3>Entradas Recientes</h3>
+                <ul>
+                    <li><a href="#">• Tendencias de Mercado 2026</a></li>
+                    <li><a href="#">• Guía de inversión para jóvenes</a></li>
+                    <li><a href="#">• Todo sobre el Modelo Bari</a></li>
+                </ul>
+            </div>
+
+            <div class="widget-cta">
+                <h4>¿Buscas asesoría personalizada?</h4>
+                <p style="font-size: 13px; color: #cfd8dc; margin-bottom: 15px;">Ponte en contacto con nuestros expertos
+                    de JACCAF COMPANY.</p>
+                <a href="tel:4611209998" class="btn-widget-contact">📞 Llámanos</a>
+                <a href="mailto:contacto@jaccaf-company.com" class="btn-widget-contact"
+                    style="background-color: transparent; color: #00f2d3; border: 2px solid #00f2d3;">✉️ Enviar
+                    Correo</a>
+            </div>
+
+        </aside>
+
+    </div>
+
+    <footer>
+        <div class="footer-content">
+            <div class="footer-brand">
+                <h2><span>JACCAF</span> COMPANY</h2>
+                <p style="color: #777; font-size: 14px;">Inversiones inmobiliarias a tu alcance.</p>
+            </div>
+            <div class="footer-links">
+                <div class="footer-col">
+                    <h4>Información</h4>
+                    <ul>
+                        <li><a href="nosotros.html">Nosotros</a></li>
+                        <li><a href="#">Desarrollos</a></li>
+                        <li><a href="ciudades.html">Ciudades</a></li>
+                    </ul>
+                </div>
+                <div class="footer-col">
+                    <h4>Contacto</h4>
+                    <ul>
+                        <li><a href="tel:4611209998">Llámanos</a></li>
+                        <li><a href="mailto:contacto@jaccaf-company.com">Escríbenos</a></li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            <p>Todos los Derechos Reservados. 2026 © JACCAF COMPANY | Práctica de Fin de Curso</p>
+        </div>
+    </footer>
+
+</body>
+
+</html>

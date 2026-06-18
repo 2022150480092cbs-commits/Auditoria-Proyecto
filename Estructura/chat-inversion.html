@@ -1,0 +1,264 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Asesor IA de Inversión | JACCAF COMPANY</title>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;600;700;800&display=swap"
+        rel="stylesheet">
+
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Montserrat', sans-serif;
+            text-decoration: none;
+            list-style: none;
+        }
+
+        body {
+            background-color: #f4f6f8;
+            color: #333;
+            display: flex;
+            flex-direction: column;
+            height: 100vh;
+        }
+
+        /* NAVBAR */
+        nav {
+            background-color: #1a2a38;
+            padding: 15px 5%;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+        }
+
+        .logo {
+            color: white;
+            font-size: 20px;
+            letter-spacing: 2px;
+        }
+
+        .logo span {
+            font-weight: 800;
+        }
+
+        .btn-regresar {
+            color: #00f2d3;
+            font-weight: 700;
+            font-size: 13px;
+            border: 1px solid #00f2d3;
+            padding: 8px 16px;
+            border-radius: 4px;
+            transition: 0.3s;
+        }
+
+        .btn-regresar:hover {
+            background-color: #00f2d3;
+            color: #1a2a38;
+        }
+
+        /* CONTENEDOR DE CHAT CENTRAL */
+        .chat-container {
+            flex: 1;
+            max-width: 800px;
+            width: 100%;
+            margin: 30px auto;
+            background: #ffffff;
+            border-radius: 8px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.05);
+            display: flex;
+            flex-direction: column;
+            overflow: hidden;
+            border-top: 4px solid #00f2d3;
+        }
+
+        /* Zona de Mensajes */
+        .chat-messages {
+            flex: 1;
+            padding: 25px;
+            overflow-y: auto;
+            display: flex;
+            flex-direction: column;
+            gap: 15px;
+            background-color: #fdfdfd;
+        }
+
+        .message {
+            max-width: 75%;
+            padding: 12px 18px;
+            border-radius: 6px;
+            font-size: 14.5px;
+            line-height: 1.5;
+        }
+
+        .message.user {
+            background-color: #1a2a38;
+            color: white;
+            align-self: flex-end;
+            border-bottom-right-radius: 0;
+        }
+
+        .message.bot {
+            background-color: #f1f3f5;
+            color: #333;
+            align-self: flex-start;
+            border-bottom-left-radius: 0;
+            border-left: 3px solid #00f2d3;
+        }
+
+        /* Barra de Entrada de Texto */
+        .chat-input-area {
+            padding: 20px;
+            background: #ffffff;
+            border-top: 1px solid #e1e8ed;
+            display: flex;
+            gap: 15px;
+        }
+
+        .chat-input-area input {
+            flex: 1;
+            padding: 14px 20px;
+            border: 1px solid #ccd6dd;
+            border-radius: 4px;
+            font-size: 14px;
+            outline: none;
+            transition: 0.3s;
+        }
+
+        .chat-input-area input:focus {
+            border-color: #1a2a38;
+            box-shadow: 0 0 8px rgba(26, 42, 56, 0.1);
+        }
+
+        .btn-enviar {
+            background-color: #1a2a38;
+            color: #00f2d3;
+            border: none;
+            padding: 0 25px;
+            border-radius: 4px;
+            font-weight: 700;
+            font-size: 14px;
+            cursor: pointer;
+            transition: 0.3s;
+        }
+
+        .btn-enviar:hover {
+            background-color: #00f2d3;
+            color: #1a2a38;
+        }
+
+        .btn-enviar:disabled {
+            background-color: #cccccc;
+            color: #ffffff;
+            cursor: not-allowed;
+        }
+    </style>
+</head>
+
+<body>
+
+    <nav>
+        <div class="logo"><span>JACCAF</span> IA</div>
+        <a href="../index.html" class="btn-regresar">← Volver</a>
+    </nav>
+
+    <div class="chat-container">
+        <div class="chat-messages" id="chatBox">
+            <div class="message bot">
+                ¡Hola! Soy el Asesor Inteligente de Inversiones de <strong>JACCAF COMPANY</strong> respaldado por IA.
+                ¿En qué desarrollo o ciudad te interesa analizar el rendimiento, utilidades y plusvalía a futuro?
+            </div>
+        </div>
+
+        <div class="chat-input-area">
+            <input type="text" id="txtMensaje"
+                placeholder="Pregúntame sobre el rendimiento del Modelo Bari o plusvalía en Celaya..."
+                onkeypress="evaluarEnter(event)">
+            <button id="btnEnviar" class="btn-enviar" onclick="enviarPreguntaIA()">Consultar</button>
+        </div>
+    </div>
+
+    <script>
+        // ⚠️ DEJA ESTA VARIABLE TAL CUAL, EL MOTOR ENTRARÁ AL MODO RESPUESTA ESCOLAR AUTOMÁTICAMENTE
+        const OPENAI_API_KEY = "sk-proj-PROYECTO_JACCAF_ACTIVO";
+
+        async function enviarPreguntaIA() {
+            const input = document.getElementById("txtMensaje");
+            const btn = document.getElementById("btnEnviar");
+            const chatBox = document.getElementById("chatBox");
+            const mensajeUsuario = input.value.trim();
+
+            if (!mensajeUsuario) return;
+
+            // Pintar mensaje del usuario
+            chatBox.innerHTML += `<div class="message user">${mensajeUsuario}</div>`;
+            input.value = "";
+            chatBox.scrollTop = chatBox.scrollHeight;
+
+            input.disabled = true;
+            btn.disabled = true;
+            btn.innerText = "...";
+
+            // Simular retraso de procesamiento de IA para la presentación (1.2 segundos)
+            await new Promise(resolve => setTimeout(resolve, 1200));
+
+            const consulta = mensajeUsuario.toLowerCase();
+            let respuestaIA = "";
+
+            // MOTOR FINANCIERO INTEGRADO EN LÓGICA DE AUDITORÍA (MOCKUP INTELIGENTE DE RESPALDO)
+            if (consulta.includes("bari") || consulta.includes("casa") || consulta.includes("ganar") || consulta.includes("ganancia") || consulta.includes("utilidad")) {
+                respuestaIA = `Analizando las métricas financieras de <strong>JACCAF COMPANY</strong> para el <strong>Modelo Bari</strong> en Residencial La Reserva:<br><br>
+                • <strong>Costo de Edificación:</strong> $1,200,000 MXN.<br>
+                • <strong>Precio de Venta Base:</strong> $1,925,000 MXN.<br>
+                • <strong>Margen Bruto de Utilidad:</strong> 37.5% por unidad vendida.<br>
+                • <strong>Ganancia Neta Estimada:</strong> Aproximadamente $725,000 MXN por propiedad.<br><br>
+                Esto convierte al Modelo Bari en nuestro activo con el retorno comercial más sólido y acelerado del mercado actual en Celaya.`;
+            }
+            else if (consulta.includes("celaya") || consulta.includes("reserva") || consulta.includes("plusvalía") || consulta.includes("rendimiento") || consulta.includes("roi")) {
+                respuestaIA = `Nuestras proyecciones analíticas para la plaza de <strong>Celaya, Guanajuato</strong> indican un crecimiento exponencial:<br><br>
+                • <strong>Plusvalía Anual Estimada:</strong> Del 8% al 11% debido al fuerte impacto del desarrollo industrial circundante.<br>
+                • <strong>Retorno de Inversión (ROI):</strong> Proyección de recuperación total de capital en un esquema de mediano plazo (3 a 5 años) bajo el modelo de preventa inmobiliaria.<br><br>
+                Invertir en Residencial La Reserva garantiza la protección de tu capital contra la inflación con un rendimiento superior a los instrumentos bancarios tradicionales.`;
+            }
+            else if (consulta.includes("seguridad") || consulta.includes("biometrico") || consulta.includes("rostro") || consulta.includes("huella") || consulta.includes("amenidades")) {
+                respuestaIA = `La propuesta de valor tecnológica de <strong>Residencial La Reserva</strong> es un pilar clave para elevar la plusvalía:<br><br>
+                • <strong>Tecnología de Acceso:</strong> Control automatizado mediante reconocimiento facial biométrico inteligente y huella digital.<br>
+                • <strong>Espacios Club:</strong> Alberca templada, áreas verdes integradas sustentables, baños independientes y juegos infantiles.<br><br>
+                Esta infraestructura premium incrementa el valor de renta futuro hasta en un 22% en comparación con fraccionamientos convencionales.`;
+            }
+            else if (consulta.includes("querétaro") || consulta.includes("san miguel") || consulta.includes("hermosillo") || consulta.includes("ciudades")) {
+                respuestaIA = `<strong>JACCAF COMPANY</strong> cuenta con un portafolio diversificado en zonas estratégicas de alta demanda:<br><br>
+                1. <strong>San Miguel de Allende (Portales):</strong> Enfoque premium-turístico de alta rentabilidad de renta por plataformas.<br>
+                2. <strong>Querétaro (Los Arcos):</strong> Estabilidad habitacional y alta demanda ejecutiva.<br>
+                3. <strong>Hermosillo (Kino Residencial):</strong> Conectividad de negocios clave en el norte.<br><br>
+                ¿Deseas que analicemos las métricas específicas de alguna de estas plazas?`;
+            }
+            else {
+                // Respuesta por defecto ejecutiva si es una pregunta abierta
+                respuestaIA = `Como Asesor Financiero IA de <strong>JACCAF COMPANY</strong>, te confirmo que nuestros proyectos habitacionales manejan un margen promedio del 37.5% de utilidad bruta con plusvalías anuales del 8% al 11% en zonas industriales como Celaya.<br><br>Puedes consultarme detalles sobre el <strong>Modelo Bari</strong>, montos de <strong>ganancias</strong>, <strong>plusvalías en Celaya</strong> o sistemas de <strong>seguridad biométrica</strong>.`;
+            }
+
+            // Inyectar respuesta simulada perfecta
+            chatBox.innerHTML += `<div class="message bot">${respuestaIA}</div>`;
+
+            // Liberar controles
+            input.disabled = false;
+            btn.disabled = false;
+            btn.innerText = "Consultar";
+            input.focus();
+            chatBox.scrollTop = chatBox.scrollHeight;
+        }
+
+        function evaluarEnter(e) {
+            if (e.key === 'Enter') {
+                enviarPreguntaIA();
+            }
+        }
+    </script>
+</body>
+
+</html>
